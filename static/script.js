@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addThousandsSeparator = (input) => {
         input.addEventListener('input', (e) => {
             let value = e.target.value.replace(/,/g, '');
-            if (value.length > 7) {
+            if (value.length > 8) {
                 e.target.value = Number(value).toLocaleString('en-IN');
             }
         });
