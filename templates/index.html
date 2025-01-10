@@ -16,7 +16,7 @@
                 <form id="simple-interest-form" class="calculator-form">
                     <div class="input-group">
                         <label for="si-principal">Principal Amount (₹)</label>
-                        <input type="number" id="si-principal" required min="0" max="10000000">
+                        <input type="number" id="si-principal" required min="0" >
                     </div>
                     <div class="input-group">
                         <label for="si-rate">Interest Rate (%)</label>
@@ -37,7 +37,7 @@
                 <form id="compound-interest-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ci-principal">Principal Amount (₹)</label>
-                        <input type="number" id="ci-principal" required min="0" max="10000000" >
+                        <input type="number" id="ci-principal" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="ci-rate">Interest Rate (%)</label>
@@ -67,7 +67,7 @@
                 <form id="gratuity-form" class="calculator-form">
                     <div class="input-group">
                         <label for="gratuity-salary">Last Drawn Salary (₹)</label>
-                        <input type="number" id="gratuity-salary" required min="0" max="10000000" >
+                        <input type="number" id="gratuity-salary" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="gratuity-years">Years of Service</label>
@@ -84,7 +84,7 @@
                 <form id="pf-form" class="calculator-form">
                     <div class="input-group">
                         <label for="pf-salary">Basic Salary (₹)</label>
-                        <input type="number" id="pf-salary" required min="0" max="10000000" >
+                        <input type="number" id="pf-salary" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="pf-employer">Employer Contribution (%)</label>
@@ -105,23 +105,23 @@
                 <form id="salary-form" class="calculator-form">
                     <div class="input-group">
                         <label for="salary-basic">Basic Salary (₹)</label>
-                        <input type="number" id="salary-basic" required min="0" max="10000000" >
+                        <input type="number" id="salary-basic" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="salary-hra">HRA (₹)</label>
-                        <input type="number" id="salary-hra" required min="0" max="10000000" >
+                        <input type="number" id="salary-hra" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="salary-da">DA (₹)</label>
-                        <input type="number" id="salary-da" required min="0" max="10000000" >
+                        <input type="number" id="salary-da" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="salary-allowances">Other Allowances (₹)</label>
-                        <input type="number" id="salary-allowances" required min="0" max="10000000" >
+                        <input type="number" id="salary-allowances" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="salary-deductions">Deductions (₹)</label>
-                        <input type="number" id="salary-deductions" required min="0" max="10000000" >
+                        <input type="number" id="salary-deductions" required min="0"  >
                     </div>
                     <button type="submit">Calculate</button>
                     <div class="result" id="salary-result"></div>
@@ -134,7 +134,7 @@
                 <form id="ppf-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ppf-investment">Yearly Investment (₹)</label>
-                        <input type="number" id="ppf-investment" required min="0" max="10000000" >
+                        <input type="number" id="ppf-investment" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="ppf-time">Time Period (Years)</label>
@@ -151,7 +151,7 @@
                 <form id="nps-form" class="calculator-form">
                     <div class="input-group">
                         <label for="nps-contribution">Monthly Contribution (₹)</label>
-                        <input type="number" id="nps-contribution" required min="0" max="10000000" >
+                        <input type="number" id="nps-contribution" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="nps-return">Expected Return (%)</label>
@@ -172,7 +172,7 @@
                 <form id="rd-form" class="calculator-form">
                     <div class="input-group">
                         <label for="rd-deposit">Monthly Deposit (₹)</label>
-                        <input type="number" id="rd-deposit" required min="0" max="10000000" >
+                        <input type="number" id="rd-deposit" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="rd-rate">Interest Rate (%)</label>
@@ -193,7 +193,7 @@
                 <form id="fd-form" class="calculator-form">
                     <div class="input-group">
                         <label for="fd-principal">Principal Amount (₹)</label>
-                        <input type="number" id="fd-principal" required min="0" max="10000000" >
+                        <input type="number" id="fd-principal" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="fd-rate">Interest Rate (%)</label>
@@ -214,11 +214,11 @@
                 <form id="ltcg-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ltcg-selling">Selling Price (₹)</label>
-                        <input type="number" id="ltcg-selling" required min="0" max="10000000" >
+                        <input type="number" id="ltcg-selling" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="ltcg-cost">Cost Price (₹)</label>
-                        <input type="number" id="ltcg-cost" required min="0" max="10000000" >
+                        <input type="number" id="ltcg-cost" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="ltcg-period">Holding Period (Years)</label>
@@ -235,11 +235,11 @@
                 <form id="roi-form" class="calculator-form">
                     <div class="input-group">
                         <label for="roi-initial">Initial Investment (₹)</label>
-                        <input type="number" id="roi-initial" required min="0" max="10000000" >
+                        <input type="number" id="roi-initial" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="roi-final">Final Value (₹)</label>
-                        <input type="number" id="roi-final" required min="0" max="10000000" >
+                        <input type="number" id="roi-final" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="roi-time">Time Period (Years)</label>
@@ -256,7 +256,7 @@
                 <form id="gst-form" class="calculator-form">
                     <div class="input-group">
                         <label for="gst-amount">Amount (₹)</label>
-                        <input type="number" id="gst-amount" required min="0" max="10000000" >
+                        <input type="number" id="gst-amount" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="gst-rate">GST Rate (%)</label>
@@ -279,7 +279,7 @@
                 <form id="discount-form" class="calculator-form">
                     <div class="input-group">
                         <label for="discount-price">Original Price (₹)</label>
-                        <input type="number" id="discount-price" required min="0" max="10000000" >
+                        <input type="number" id="discount-price" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="discount-percentage">Discount (%)</label>
@@ -296,7 +296,7 @@
                 <form id="emi-form" class="calculator-form">
                     <div class="input-group">
                         <label for="emi-principal">Loan Amount (₹)</label>
-                        <input type="number" id="emi-principal" required min="0" max="10000000" >
+                        <input type="number" id="emi-principal" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="emi-rate">Interest Rate (% p.a.)</label>
@@ -317,7 +317,7 @@
                 <form id="down-payment-form" class="calculator-form">
                     <div class="input-group">
                         <label for="dp-price">Asset Price (₹)</label>
-                        <input type="number" id="dp-price" required min="0" max="10000000" >
+                        <input type="number" id="dp-price" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="dp-percentage">Down Payment (%)</label>
@@ -334,11 +334,11 @@
                 <form id="cagr-form" class="calculator-form">
                     <div class="input-group">
                         <label for="cagr-initial">Initial Value (₹)</label>
-                        <input type="number" id="cagr-initial" required min="0" max="10000000" >
+                        <input type="number" id="cagr-initial" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="cagr-final">Final Value (₹)</label>
-                        <input type="number" id="cagr-final" required min="0" max="10000000" >
+                        <input type="number" id="cagr-final" required min="0"  >
                     </div>
                     <div class="input-group">
                         <label for="cagr-time">Time Period (Years)</label>
