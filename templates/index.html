@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Calculators Suite</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Financial Calculators Suite</h1>
+        <div class="calculator-grid">
+            <!-- Simple Interest Calculator -->
+            <div class="calculator-tile">
+                <h2>Simple Interest Calculator</h2>
+                <form id="simple-interest-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="si-principal">Principal Amount (₹)</label>
+                        <input type="number" id="si-principal" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="si-rate">Interest Rate (%)</label>
+                        <input type="number" id="si-rate" step="0.01" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="si-time">Time (Years)</label>
+                        <input type="number" id="si-time" step="0.1" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="si-result"></div>
+                </form>
+            </div>
+
+            <!-- Compound Interest Calculator -->
+            <div class="calculator-tile">
+                <h2>Compound Interest Calculator</h2>
+                <form id="compound-interest-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="ci-principal">Principal Amount (₹)</label>
+                        <input type="number" id="ci-principal" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ci-rate">Interest Rate (%)</label>
+                        <input type="number" id="ci-rate" step="0.01" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ci-time">Time (Years)</label>
+                        <input type="number" id="ci-time" step="0.1" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ci-frequency">Compounding Frequency</label>
+                        <select id="ci-frequency">
+                            <option value="1">Annually</option>
+                            <option value="2">Semi-annually</option>
+                            <option value="4">Quarterly</option>
+                            <option value="12">Monthly</option>
+                        </select>
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="ci-result"></div>
+                </form>
+            </div>
+
+            <!-- Gratuity Calculator -->
+            <div class="calculator-tile">
+                <h2>Gratuity Calculator</h2>
+                <form id="gratuity-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="gratuity-salary">Last Drawn Salary (₹)</label>
+                        <input type="number" id="gratuity-salary" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="gratuity-years">Years of Service</label>
+                        <input type="number" id="gratuity-years" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="gratuity-result"></div>
+                </form>
+            </div>
+
+            <!-- PF Calculator -->
+            <div class="calculator-tile">
+                <h2>PF Calculator</h2>
+                <form id="pf-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="pf-salary">Basic Salary (₹)</label>
+                        <input type="number" id="pf-salary" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="pf-employer">Employer Contribution (%)</label>
+                        <input type="number" id="pf-employer" value="12" min="0" max="100">
+                    </div>
+                    <div class="input-group">
+                        <label for="pf-employee">Employee Contribution (%)</label>
+                        <input type="number" id="pf-employee" value="12" min="0" max="100">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="pf-result"></div>
+                </form>
+            </div>
+
+            <!-- Salary Calculator -->
+            <div class="calculator-tile">
+                <h2>Salary Calculator</h2>
+                <form id="salary-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="salary-basic">Basic Salary (₹)</label>
+                        <input type="number" id="salary-basic" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="salary-hra">HRA (₹)</label>
+                        <input type="number" id="salary-hra" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="salary-da">DA (₹)</label>
+                        <input type="number" id="salary-da" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="salary-allowances">Other Allowances (₹)</label>
+                        <input type="number" id="salary-allowances" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="salary-deductions">Deductions (₹)</label>
+                        <input type="number" id="salary-deductions" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="salary-result"></div>
+                </form>
+            </div>
+
+            <!-- PPF Calculator -->
+            <div class="calculator-tile">
+                <h2>PPF Calculator</h2>
+                <form id="ppf-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="ppf-investment">Yearly Investment (₹)</label>
+                        <input type="number" id="ppf-investment" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ppf-time">Time Period (Years)</label>
+                        <input type="number" id="ppf-time" required min="15" max="50">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="ppf-result"></div>
+                </form>
+            </div>
+
+            <!-- NPS Calculator -->
+            <div class="calculator-tile">
+                <h2>NPS Calculator</h2>
+                <form id="nps-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="nps-contribution">Monthly Contribution (₹)</label>
+                        <input type="number" id="nps-contribution" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="nps-return">Expected Return (%)</label>
+                        <input type="number" id="nps-return" step="0.1" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="nps-time">Investment Period (Years)</label>
+                        <input type="number" id="nps-time" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="nps-result"></div>
+                </form>
+            </div>
+
+            <!-- RD Calculator -->
+            <div class="calculator-tile">
+                <h2>RD Calculator</h2>
+                <form id="rd-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="rd-deposit">Monthly Deposit (₹)</label>
+                        <input type="number" id="rd-deposit" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="rd-rate">Interest Rate (%)</label>
+                        <input type="number" id="rd-rate" step="0.01" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="rd-time">Time Period (Years)</label>
+                        <input type="number" id="rd-time" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="rd-result"></div>
+                </form>
+            </div>
+
+            <!-- FD Calculator -->
+            <div class="calculator-tile">
+                <h2>FD Calculator</h2>
+                <form id="fd-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="fd-principal">Principal Amount (₹)</label>
+                        <input type="number" id="fd-principal" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="fd-rate">Interest Rate (%)</label>
+                        <input type="number" id="fd-rate" step="0.01" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="fd-time">Time Period (Years)</label>
+                        <input type="number" id="fd-time" step="0.25" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="fd-result"></div>
+                </form>
+            </div>
+
+            <!-- LTCG Calculator -->
+            <div class="calculator-tile">
+                <h2>LTCG Calculator</h2>
+                <form id="ltcg-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="ltcg-selling">Selling Price (₹)</label>
+                        <input type="number" id="ltcg-selling" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ltcg-cost">Cost Price (₹)</label>
+                        <input type="number" id="ltcg-cost" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="ltcg-period">Holding Period (Years)</label>
+                        <input type="number" id="ltcg-period" step="0.1" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="ltcg-result"></div>
+                </form>
+            </div>
+
+            <!-- ROI Calculator -->
+            <div class="calculator-tile">
+                <h2>ROI Calculator</h2>
+                <form id="roi-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="roi-initial">Initial Investment (₹)</label>
+                        <input type="number" id="roi-initial" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="roi-final">Final Value (₹)</label>
+                        <input type="number" id="roi-final" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="roi-time">Time Period (Years)</label>
+                        <input type="number" id="roi-time" step="0.1" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="roi-result"></div>
+                </form>
+            </div>
+
+            <!-- GST Calculator -->
+            <div class="calculator-tile">
+                <h2>GST Calculator</h2>
+                <form id="gst-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="gst-amount">Amount (₹)</label>
+                        <input type="number" id="gst-amount" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="gst-rate">GST Rate (%)</label>
+                        <select id="gst-rate">
+                            <option value="0">0%</option>
+                            <option value="5">5%</option>
+                            <option value="12">12%</option>
+                            <option value="18">18%</option>
+                            <option value="28">28%</option>
+                        </select>
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="gst-result"></div>
+                </form>
+            </div>
+
+            <!-- Discount Calculator -->
+            <div class="calculator-tile">
+                <h2>Discount Calculator</h2>
+                <form id="discount-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="discount-price">Original Price (₹)</label>
+                        <input type="number" id="discount-price" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="discount-percentage">Discount (%)</label>
+                        <input type="number" id="discount-percentage" required min="0" max="100">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="discount-result"></div>
+                </form>
+            </div>
+
+            <!-- EMI Calculator -->
+            <div class="calculator-tile">
+                <h2>EMI Calculator</h2>
+                <form id="emi-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="emi-principal">Loan Amount (₹)</label>
+                        <input type="number" id="emi-principal" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="emi-rate">Interest Rate (% p.a.)</label>
+                        <input type="number" id="emi-rate" step="0.1" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="emi-time">Loan Tenure (Years)</label>
+                        <input type="number" id="emi-time" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="emi-result"></div>
+                </form>
+            </div>
+
+            <!-- Down Payment Calculator -->
+            <div class="calculator-tile">
+                <h2>Down Payment Calculator</h2>
+                <form id="down-payment-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="dp-price">Asset Price (₹)</label>
+                        <input type="number" id="dp-price" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="dp-percentage">Down Payment (%)</label>
+                        <input type="number" id="dp-percentage" required min="0" max="100">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="down-payment-result"></div>
+                </form>
+            </div>
+
+            <!-- CAGR Calculator -->
+            <div class="calculator-tile">
+                <h2>CAGR Calculator</h2>
+                <form id="cagr-form" class="calculator-form">
+                    <div class="input-group">
+                        <label for="cagr-initial">Initial Value (₹)</label>
+                        <input type="number" id="cagr-initial" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="cagr-final">Final Value (₹)</label>
+                        <input type="number" id="cagr-final" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="cagr-time">Time Period (Years)</label>
+                        <input type="number" id="cagr-time" step="0.1" required min="0">
+                    </div>
+                    <button type="submit">Calculate</button>
+                    <div class="result" id="cagr-result"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
