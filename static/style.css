@@ -85,6 +85,20 @@ section{
 .btn:hover{
   background-color: #6a42b3;
 }
+.card-img{
+  height: 5rem;
+  width: 5rem;
+  /* margin-left: 1rem; */
+  position: relative;
+   top: -1rem;
+   /*
+  left: 8rem; */
+  /* background-color: red; */
+}
+.btn-img{
+  /* display: flex; */
+  /* background-color: red; */
+}
 .card-container{
   display: flex;
   flex-direction: column;
@@ -92,7 +106,7 @@ section{
   gap: 1rem;
   background-color: #1B1B1B;
   box-shadow: 0px 0px 10px rgb(47, 46, 46);
-  height: 17rem;
+  height: auto;
   width: auto;
   padding: 1rem;
   border-radius: 10px;
@@ -205,11 +219,13 @@ button{
   border-radius: 10px;
   border: none;
   width: 100%;
+  margin-top: 1.5rem;
   background-color: #5E23CF;
   color: white;
   font-family: "Nunito", sans-serif;
   font-size: large;
   transition: all ease 0.5s;
+  cursor: pointer;
   
 }
 button:hover{
@@ -258,9 +274,13 @@ button:hover{
   font-family: "Nunito";
   line-height: 1.5rem;
   align-items: center;
-    display: flex;
+    display: none;
     justify-content: center;
+    /* margin-top: 2rem; */
 
+}
+.flex{
+  display: flex;
 }
 .col{
   display: flex;
@@ -271,3 +291,44 @@ button:hover{
 }
 
 /* =====================Popup content section ends here============ */
+
+
+/* ============responsive design for tablate ============= */
+@media only screen and (max-width: 768px) {
+  .nav-logo-searchbar{
+    justify-content: start;
+  }
+  .logo{
+    margin-left: 2rem;
+  }
+  .card-container{
+
+  }
+  section{
+    margin: 2rem;
+  }
+  h2{
+    font-size: 0.8rem;
+  }
+  p{
+    font-size: 0.5rem;
+  }
+  .btn{
+    font-size: 0.5rem;
+    margin: 0;
+    padding: 5px;
+  }
+  .card-img{
+    /* display: none; */
+  }
+  .card-container {
+    width: 7.2rem;
+  }
+  .card-img{
+    width: 2rem;
+    height: 2rem;
+  }
+  .calculator-box {
+    height: 156vw;
+  }
+}
