@@ -289,6 +289,9 @@ button:hover{
 .bold{
   font-weight: bold;
 }
+footer{
+  height: 2rem;
+}
 
 /* =====================Popup content section ends here============ */
 
@@ -306,6 +309,7 @@ button:hover{
   }
   section{
     margin: 2rem;
+    gap: 2rem 1rem;
   }
   h2{
     font-size: 0.8rem;
@@ -324,6 +328,9 @@ button:hover{
   .card-container {
     width: 7.2rem;
   }
+  .flex-box{
+    width: 44%;
+  }
   .card-img{
     width: 2rem;
     height: 2rem;
@@ -331,4 +338,143 @@ button:hover{
   .calculator-box {
     height: 156vw;
   }
+  .popup-heading{
+    font-size: 1.2rem;
+  }
+  .result{
+    width: fit-content;
+  }
+  .result-p{
+    font-size: 1rem;
+  }
+}
+
+/* =================Mobile =================== */
+@media only screen and (max-width: 378px) {
+ 
+   body{
+    margin: 0;
+    padding: 0;
+   }
+  .header{
+    /* background-color: red; */
+    width: 156%;
+    padding: 2rem 0 2rem 3rem;
+  }
+  .header-text{
+    /* font-size: 2.5rem; */
+  }
+  p{
+    display: none;
+  }
+  .card-img{
+    margin: 10px;
+    width: 4rem;
+    height: 4rem;
+  }
+  .calculator-box{
+    /* background-color: red; */
+    height: 81rem;
+    width: 148vw;
+  }
+  .flex-box {
+    width: 66%;
+    position: relative;
+    left: 31px;
+  }
+  section{
+    grid-row: auto auto;
+  grid-template-columns: auto auto ;
+  width: 40%;
+  margin: 3rem 0 0 0;
+  /* background-color: red; */
+  gap: 2rem 1rem;
+  }
+  .popup-heading{
+    font-size: 1.2rem;
+  }
+  .result{
+    width: fit-content;
+  }
+  .result-p{
+    font-size: 1rem;
+  }
+  .btn-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn{
+    display: none;
+  }
+  
+}
+@media only screen and (max-width: 378px){
+  .header{
+    /* background-color: red; */
+    width: 100%;
+    padding: 2rem 0 2rem 3rem;
+  }
+  .result{
+    width: fit-content;
+  }
+  .flex-box {
+    
+    position: relative;
+    left: 60px;
+  }
+}
+@media only screen and (max-width: 426px) {
+  .header{
+    /* background-color: red; */
+    width: 120%;
+    padding: 2rem 0 2rem 3rem;
+  }
+  .header-text{
+    font-size: 2.5rem;
+  }
+  .calculator-box{
+    /* background-color: red; */
+    height: 81rem;
+    width: 148vw;
+  }
+  .flex-box {
+    width: 66%;
+    position: relative;
+    left: 31px;
+  }
+  section{
+    grid-row: auto auto;
+  grid-template-columns: auto auto auto ;
+  width: 24%;
+  margin: 3rem 0 0 0;
+  /* background-color: red; */
+  gap: 2rem 1rem;
+  }
+  .card-img{
+    margin: 10px;
+    width: 4rem;
+    height: 4rem;
+  }
+  p{
+    display: none;
+  }
+  .popup-heading{
+    font-size: 1.2rem;
+  }
+  .result{
+    width: fit-content;
+  }
+  .result-p{
+    font-size: 1rem;
+  }
+  .btn-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn{
+    display: none;
+  }
+  
 }

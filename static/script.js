@@ -1,11 +1,16 @@
 // script.js - Complete Implementation
-
+function removeCommas(str) {
+  while (str.search(",") >= 0) {
+      str = (str + "").replace(',', '');
+  }
+  return str;
+};
 
 
 // Utility Functions
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
-    style: "currency",
+    // style: "currency",
     currency: "INR",
     maximumFractionDigits: 2,
   }).format(amount);
@@ -132,46 +137,51 @@ const calculateCAGR = (initialValue, finalValue, time) => {
 document.addEventListener("DOMContentLoaded", () => {
 
 
-  document
-        .getElementById("simple-interest-form")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          // showResultBox()
-          try {
-            // resultSection.style.display = "flex"
-            const principal = parseFloat(
-              document.getElementById("si-principal").value
-            );
-            principal = formatCurrency(principal)
-            const rate = parseFloat(document.getElementById("si-rate").value);
-            const time = parseFloat(document.getElementById("si-time").value);
+  // document
+  //       .getElementById("simple-interest-form")
+  //       .addEventListener("submit", (e) => {
+  //         e.preventDefault();
+  //         // showResultBox()
+  //         try {
+  //           // resultSection.style.display = "flex"
+  //           const principal = parseFloat(
+  //             document.getElementById("si-principal").value
+  //           );
+  //           principal = formatCurrency(principal)
+  //           const rate = parseFloat(document.getElementById("si-rate").value);
+  //           const time = parseFloat(document.getElementById("si-time").value);
 
-            const result = calculateSimpleInterest(principal, rate, time);
-            showResult(
-              "si-result",
-              `
-              <div class="col">
-                <p> <span class="bold"> Interest: </span> ${formatCurrency(result.interest)} </p> <br>
-                <p> <span class="bold">Total Amount:  </span> ${formatCurrency(result.total)}</p>
-                </div>
-            `
-            );
-          } catch (error) {
-            showError("si-result", "Invalid input values");
-          }
-        });
+  //           const result = calculateSimpleInterest(principal, rate, time);
+  //           showResult(
+  //             "si-result",
+  //             `
+  //             <div class="col">
+  //               <p> <span class="bold"> Interest: </span> ${formatCurrency(result.interest)} </p> <br>
+  //               <p> <span class="bold">Total Amount:  </span> ${formatCurrency(result.total)}</p>
+  //               </div>
+  //           `
+  //           );
+  //         } catch (error) {
+  //           showError("si-result", "Invalid input values");
+  //         }
+  //       });
+
+
 
   // Input Validation and Real-time Feedback
+  // function inputs () {
   const numberInputs = document.querySelectorAll('input[type="number"]');
   numberInputs.forEach((input) => {
     input.addEventListener("input", (e) => {
       if (e.target.value < 0) {
         e.target.value = 0;
+        console.log("run 0")
       }
     });
   });
-
+  // }
   // Clear Results on Input Change
+  // function clearResultOnInputChange () {}
   const allInputs = document.querySelectorAll("input, select");
   allInputs.forEach((input) => {
     input.addEventListener("input", (e) => {
@@ -248,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Add keyboard shortcuts
+  function keyBoard (){
   document.addEventListener("keydown", (e) => {
     e.preventDefault();
     if (e.ctrlKey && e.key === "Enter") {
@@ -259,7 +270,39 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+ }
 });
+
+// function inputs (principle) {
+//   let rawValue ;
+//   let numericValue;
+//   const numberInputs = document.querySelectorAll('.amount');
+//   numberInputs.forEach((input) => {
+//     input.addEventListener("focusout", function (e) {
+
+//       rawValue = e.target.value;
+//       console.log("Raw Input Value:", rawValue);
+
+//       numericValue = parseFloat(rawValue);
+//       //  if(e.target.value>0){
+        
+//         let formattedValue = formatCurrency(numericValue);
+//         console.log("Formatted Value:", formattedValue);
+//         console.log(input.classList.value.includes('amount'))
+
+//         if(input.classList.value.includes('amount')){
+//         // Display formatted value 
+//         e.target.setAttribute('type','text')
+//         e.target.value = formattedValue
+        
+//         // Keep the actual number value in the input field
+//         input.value = numericValue;
+//         }
+//         // }
+        
+//       });
+//   });
+//   }
 
 const btns = document.querySelectorAll(".btn");
 const popUp = document.getElementById("cal-Box");
@@ -269,8 +312,19 @@ const popupBox = document.getElementById("inside-popup");
 btns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     console.log("clicked", btn.className);
-    window.scroll(200, 400);
+    const width = window.innerWidth;
+    if(width <= 767){
+    window.scroll(100, 100);
     popUp.style.display = "flex";
+    }
+    else if(width >= 768 && width <= 1024){
+      window.scroll(950, 290);
+      popUp.style.display = "flex";
+    }
+    else{
+      window.scroll(200, 400);
+      popUp.style.display = "flex";
+    }
     //  for simple intrest popup
     if (btn.className.includes("sic")) {
       popupBox.innerHTML = `
@@ -283,7 +337,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="simple-interest-form" class="calculator-form">
                 <div class="input-group">
                 <label for="si-principal">Principal Amount (₹)</label>
-                <input type="number" step="1000" class = "inputs" id="si-principal" required min="0" placeholder="Principal Amount (₹)">
+                <input type="number" step="1000" class = "inputs amount" id="si-principal" required min="0" placeholder="Principal Amount (₹)">
                 </div>
                 <div class="input-group">
                 <label for="si-rate">Interest Rate (%)</label>
@@ -291,14 +345,18 @@ btns.forEach((btn) => {
                 </div>
                 <div class="input-group">
                 <label for="si-time">Time (Years)</label>
-                <input type="number" class = "inputs"  id="si-time" step="0.1" required min="0" placeholder="Time (Years)">
+                <input type="number" class = "inputs"  id="si-time" step="1" required min="0" placeholder="Time (Years)">
                 </div>
                 <button type="submit" id="pop">Calculate</button>
                 </form>
                 <div class="result" id="si-result"></div>
                 </div>
                 `;
+                // keyBoard ()
 
+              
+              // inputs()
+               
       // Simple Interest Calculator
       document
         .getElementById("simple-interest-form")
@@ -308,23 +366,22 @@ btns.forEach((btn) => {
           try {
             // resultSection.style.display = "flex"
             // principal = addThousandsSeparator(e.target.value)
-           
-            
             const principal = parseFloat(
               document.getElementById("si-principal").value 
-
             );
             
             const rate = parseFloat(document.getElementById("si-rate").value);
             const time = parseFloat(document.getElementById("si-time").value);
 
             const result = calculateSimpleInterest(principal, rate, time);
+            // inputs(principal)
+
             showResult(
               "si-result",
               `
               <div class="col">
-                <p> <span class="bold"> Interest: </span> ${formatCurrency(result.interest)} </p> <br>
-                <p> <span class="bold">Total Amount:  </span> ${formatCurrency(result.total)}</p>
+                <p class="result-p"> <span class="bold"> Interest: </span> ${formatCurrency(result.interest)} </p> <br>
+                <p class="result-p"> <span class="bold">Total Amount:  </span> ${formatCurrency(result.total)}</p>
                 </div>
             `
             );
@@ -343,7 +400,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="compound-interest-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ci-principal">Principal Amount (₹)</label>
-                        <input class = "inputs" type="number" step="1000" id="ci-principal" required min="0" placeholder="Principal Amount (₹)"  >
+                        <input class = "inputs amount" type="number" step="1000" id="ci-principal" required min="0" placeholder="Principal Amount (₹)"  >
                     </div>
                     <div class="input-group">
                         <label for="ci-rate">Interest Rate (%)</label>
@@ -393,9 +450,9 @@ btns.forEach((btn) => {
               "ci-result",
               `
               <div class="col">
-               <p> <span class="bold">  
+               <p class="result-p"> <span class="bold">  
               Interest Earned:</span>  ${formatCurrency(result.interest)}</p> <br>
-              <p> <span class="bold">
+              <p class="result-p"> <span class="bold">
               Maturity Amount: </span>${formatCurrency(result.amount)}</p>
                 </div>
           `
@@ -444,7 +501,7 @@ btns.forEach((btn) => {
               "gratuity-result",
               `
               <div class="col">
-               <p> <span class="bold"> 
+               <p class="result-p"> <span class="bold"> 
                 Gratuity Amount:</span> ${formatCurrency(gratuity)}</p>
                 </div>
             `
@@ -500,11 +557,11 @@ btns.forEach((btn) => {
             "pf-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Employer Contribution: </span> ${formatCurrency(result.employer)}</p> <br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Employee Contribution: </span> ${formatCurrency(result.employee)}<p/><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Total Monthly PF: </span> ${formatCurrency(result.total)}</p>
             `
           );
@@ -523,23 +580,23 @@ btns.forEach((btn) => {
                 <form class ="form" id="salary-form" class="calculator-form">
                     <div class="input-group">
                         <label for="salary-basic">Basic Salary (₹)</label>
-                        <input class = "inputs" type="number" id="salary-basic" required min="0" placeholder="Basic Salary (₹)" >
+                        <input class = "inputs" type="number" id="salary-basic" required min="0" placeholder="Basic Salary (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="salary-hra">HRA (₹)</label>
-                        <input class = "inputs" type="number" id="salary-hra" required min="0" placeholder="HRA (₹)" >
+                        <input class = "inputs" type="number" id="salary-hra" required min="0" placeholder="HRA (₹)" step="100" >
                     </div>
                     <div class="input-group">
                         <label for="salary-da">DA (₹)</label>
-                        <input class = "inputs" type="number" id="salary-da" required min="0" placeholder="DA (₹)" >
+                        <input class = "inputs" type="number" id="salary-da" required min="0" placeholder="DA (₹)" step="100">
                     </div>
                     <div class="input-group">
                         <label for="salary-allowances">Other Allowances (₹)</label>
-                        <input class = "inputs" type="number" id="salary-allowances" required min="0" placeholder="Other Allowances (₹)" >
+                        <input class = "inputs" type="number" id="salary-allowances" required min="0" placeholder="Other Allowances (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="salary-deductions">Deductions (₹)</label>
-                        <input class = "inputs" type="number" id="salary-deductions" required min="0" placeholder="Deductions (₹)" >
+                        <input class = "inputs" type="number" id="salary-deductions" required min="0" placeholder="Deductions (₹)" step="1000" >
                     </div>
                     <button type="submit">Calculate</button>
                     <div class="result" id="salary-result"></div>
@@ -574,9 +631,9 @@ btns.forEach((btn) => {
             "salary-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Gross Salary:</span> ${formatCurrency(result.gross)}</p><br>
-                 <p> <span class="bold">
+                 <p class="result-p"> <span class="bold">
                 Net Salary: </span> ${formatCurrency(result.net)}</p>
                 </div>
             `
@@ -595,7 +652,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="ppf-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ppf-investment">Yearly Investment (₹)</label>
-                        <input class = "inputs" type="number" id="ppf-investment" required min="0" placeholder="Yearly Investment (₹)" >
+                        <input class = "inputs" type="number" id="ppf-investment" required min="0" placeholder="Yearly Investment (₹)" step="1000" >
                     </div>
                     <div class="input-group">
                         <label for="ppf-time">Time Period (Years)</label>
@@ -623,11 +680,11 @@ btns.forEach((btn) => {
             "ppf-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Total Investment: </span>${formatCurrency(totalInvestment)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Interest Earned:</span> ${formatCurrency(interest)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Maturity Amount: </span> ${formatCurrency(maturityAmount)} </p>
                 </div>
             `
@@ -647,7 +704,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="nps-form" class="calculator-form">
                     <div class="input-group">
                         <label for="nps-contribution">Monthly Contribution (₹)</label>
-                        <input class = "inputs" type="number" id="nps-contribution" required min="0" placeholder="Monthly Contribution (₹)" >
+                        <input class = "inputs" type="number" id="nps-contribution" required min="0" placeholder="Monthly Contribution (₹)" step="1000" >
                     </div>
                     <div class="input-group">
                         <label for="nps-return">Expected Return (%)</label>
@@ -687,11 +744,11 @@ btns.forEach((btn) => {
             "nps-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Total Investment: </span> ${formatCurrency(totalInvestment)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Interest Earned: </span> ${formatCurrency(interest)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Maturity Amount: </span>${formatCurrency(maturityAmount)}</p>
                 </div>
             `
@@ -711,11 +768,11 @@ btns.forEach((btn) => {
                 <form class ="form" id="rd-form" class="calculator-form">
                     <div class="input-group">
                         <label for="rd-deposit">Monthly Deposit (₹)</label>
-                        <input class = "inputs" type="number" id="rd-deposit" required min="0" placeholder="Monthly Deposit (₹)" >
+                        <input class = "inputs" type="number" id="rd-deposit" required min="0" placeholder="Monthly Deposit (₹)" step="1000" >
                     </div>
                     <div class="input-group">
                         <label for="rd-rate">Interest Rate (%)</label>
-                        <input class = "inputs" type="number" id="rd-rate" step="0.01" required min="0" placeholder="Interest Rate (%)">
+                        <input class = "inputs" type="number" id="rd-rate" step="0.1" required min="0" placeholder="Interest Rate (%)">
                     </div>
                     <div class="input-group">
                         <label for="rd-time">Time Period (Years)</label>
@@ -745,11 +802,11 @@ btns.forEach((btn) => {
             "rd-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Total Investment: </span>${formatCurrency(totalInvestment)}</p><br>
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Interest Earned:</span> ${formatCurrency(interest)}</p><br>
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Maturity Amount: </span>${formatCurrency(maturityAmount)}</p>
                 </div>
             `
@@ -769,15 +826,15 @@ btns.forEach((btn) => {
                 <form class ="form" id="fd-form" class="calculator-form">
                     <div class="input-group">
                         <label for="fd-principal">Principal Amount (₹)</label>
-                        <input class = "inputs" type="number" id="fd-principal" required min="0" placeholder="Principal Amount (₹)" >
+                        <input class = "inputs" type="number" id="fd-principal" required min="0" placeholder="Principal Amount (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="fd-rate">Interest Rate (%)</label>
-                        <input class = "inputs" type="number" id="fd-rate" step="0.01" required min="0" placeholder="Interest Rate (%)">
+                        <input class = "inputs" type="number" id="fd-rate" step="0.1" required min="0" placeholder="Interest Rate (%)">
                     </div>
                     <div class="input-group">
                         <label for="fd-time">Time Period (Years)</label>
-                        <input class = "inputs" type="number" id="fd-time" step="0.25" required min="0" placeholder="Time Period (Years)">
+                        <input class = "inputs" type="number" id="fd-time" step="1" required min="0" placeholder="Time Period (Years)">
                     </div>
                     <button type="submit">Calculate</button>
                     <div class="result" id="fd-result"></div>
@@ -801,11 +858,11 @@ btns.forEach((btn) => {
             "fd-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Principal Amount: </span>${formatCurrency(principal)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Interest Earned: </span> ${formatCurrency(interest)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Maturity Amount: </span>${formatCurrency(maturityAmount)}</p>
                 </div>
             `
@@ -825,15 +882,15 @@ btns.forEach((btn) => {
                 <form class ="form" id="ltcg-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ltcg-selling">Selling Price (₹)</label>
-                        <input class = "inputs" type="number" id="ltcg-selling" required min="0" placeholder="Selling Price (₹)" >
+                        <input class = "inputs" type="number" id="ltcg-selling" required min="0" placeholder="Selling Price (₹)" step="1000" >
                     </div>
                     <div class="input-group">
                         <label for="ltcg-cost">Cost Price (₹)</label>
-                        <input class = "inputs" type="number" id="ltcg-cost" required min="0" placeholder="Cost Price (₹)" >
+                        <input class = "inputs" type="number" id="ltcg-cost" required min="0" placeholder="Cost Price (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="ltcg-period">Holding Period (Years)</label>
-                        <input class = "inputs" type="number" id="ltcg-period" step="0.1" required min="0" placeholder="Holding Period (Years)">
+                        <input class = "inputs" type="number" id="ltcg-period" step="1" required min="0" placeholder="Holding Period (Years)">
                     </div>
                     <button type="submit">Calculate</button>
                     <div class="result" id="ltcg-result"></div>
@@ -859,9 +916,9 @@ btns.forEach((btn) => {
             "ltcg-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Capital Gains:</span> ${formatCurrency(result.gain)}</p><br>
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Tax Amount: </span>${formatCurrency(result.tax)}</p>
                 </div>
             `
@@ -880,15 +937,15 @@ btns.forEach((btn) => {
                 <form class ="form" id="roi-form" class="calculator-form">
                     <div class="input-group">
                         <label for="roi-initial">Initial Investment (₹)</label>
-                        <input class = "inputs" type="number" id="roi-initial" required min="0" placeholder="Initial Investment (₹)" >
+                        <input class = "inputs" type="number" id="roi-initial" required min="0" placeholder="Initial Investment (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="roi-final">Final Value (₹)</label>
-                        <input class = "inputs" type="number" id="roi-final" required min="0" placeholder="Final Value (₹)" >
+                        <input class = "inputs" type="number" id="roi-final" required min="0" placeholder="Final Value (₹)" step="1000" >
                     </div>
                     <div class="input-group">
                         <label for="roi-time">Time Period (Years)</label>
-                        <input class = "inputs" type="number" id="roi-time" step="0.1" required min="0" placeholder="Time Period (Years)">
+                        <input class = "inputs" type="number" id="roi-time" step="1" required min="0" placeholder="Time Period (Years)">
                     </div>
                     <button type="submit">Calculate</button>
                     <div class="result" id="roi-result"></div>
@@ -913,9 +970,9 @@ btns.forEach((btn) => {
             "roi-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Return on Investment: </span> ${formatPercentage(roi)}</p><br>
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Absolute Return: </span>${formatCurrency(
                   finalValue - initialInvestment
                 )}</p>
@@ -937,7 +994,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="gst-form" class="calculator-form">
                     <div class="input-group">
                         <label for="gst-amount">Amount (₹)</label>
-                        <input class = "inputs" type="number" id="gst-amount" required min="0" placeholder="Amount (₹)" >
+                        <input class = "inputs" type="number" id="gst-amount" required min="0" placeholder="Amount (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="gst-rate">GST Rate (%)</label>
@@ -969,9 +1026,9 @@ btns.forEach((btn) => {
             "gst-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 GST Amount:</span> ${formatCurrency(result.gstAmount)}</p><br>
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Total Amount:</span> ${formatCurrency(result.total)}</p>
                 </div>
             `
@@ -991,7 +1048,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="discount-form" class="calculator-form">
                     <div class="input-group">
                         <label for="discount-price">Original Price (₹)</label>
-                        <input class = "inputs" type="number" id="discount-price" required min="0" placeholder="Original Price (₹)" >
+                        <input class = "inputs" type="number" id="discount-price" required min="0" placeholder="Original Price (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="discount-percentage">Discount (%)</label>
@@ -1020,9 +1077,9 @@ btns.forEach((btn) => {
               "discount-result",
               `
               <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Discount Amount: </span>${formatCurrency(result.discountAmount)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Final Price: </span>${formatCurrency(result.finalPrice)}</p>
                 </div>
             `
@@ -1042,7 +1099,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="emi-form" class="calculator-form">
                     <div class="input-group">
                         <label for="emi-principal">Loan Amount (₹)</label>
-                        <input class = "inputs" type="number" id="emi-principal" required min="0" placeholder="Loan Amount (₹)" >
+                        <input class = "inputs" type="number" id="emi-principal" required min="0" placeholder="Loan Amount (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="emi-rate">Interest Rate (% p.a.)</label>
@@ -1050,7 +1107,7 @@ btns.forEach((btn) => {
                     </div>
                     <div class="input-group">
                         <label for="emi-time">Loan Tenure (Years)</label>
-                        <input class = "inputs" type="number" id="emi-time" required min="0" placeholder="Loan Tenure (Years)">
+                        <input class = "inputs" type="number" id="emi-time" required min="0" placeholder="Loan Tenure (Years)" step="1">
                     </div>
                     <button type="submit">Calculate</button>
                     <div class="result" id="emi-result"></div>
@@ -1073,11 +1130,11 @@ btns.forEach((btn) => {
             "emi-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 Monthly EMI: </span> ${formatCurrency(result.emi)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Total Interest: </span>${formatCurrency(result.totalInterest)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Total Amount: </span> ${formatCurrency(result.totalAmount)} </p>
                 </div>
             `
@@ -1097,7 +1154,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="down-payment-form" class="calculator-form">
                     <div class="input-group">
                         <label for="dp-price">Asset Price (₹)</label>
-                        <input class = "inputs" type="number" id="dp-price" required min="0" placeholder="Asset Price (₹)" >
+                        <input class = "inputs" type="number" id="dp-price" required min="0" placeholder="Asset Price (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="dp-percentage">Down Payment (%)</label>
@@ -1130,9 +1187,9 @@ btns.forEach((btn) => {
               "down-payment-result",
               `
               <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
               Down Payment Amount: </span>${formatCurrency(result.downPayment)}</p><br>
-              <p> <span class="bold">
+              <p class="result-p"> <span class="bold">
               Loan Amount Required: </span>${formatCurrency(result.loanAmount)}</p>
               </div>
           `
@@ -1152,11 +1209,11 @@ btns.forEach((btn) => {
                 <form class ="form" id="cagr-form" class="calculator-form">
                     <div class="input-group">
                         <label for="cagr-initial">Initial Value (₹)</label>
-                        <input class = "inputs" type="number" id="cagr-initial" required min="0" placeholder="Initial Value (₹)" >
+                        <input class = "inputs" type="number" id="cagr-initial" required min="0" placeholder="Initial Value (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="cagr-final">Final Value (₹)</label>
-                        <input class = "inputs" type="number" id="cagr-final" required min="0" placeholder="Final Value (₹)" >
+                        <input class = "inputs" type="number" id="cagr-final" required min="0" placeholder="Final Value (₹)" step="1000">
                     </div>
                     <div class="input-group">
                         <label for="cagr-time">Time Period (Years)</label>
@@ -1184,9 +1241,9 @@ btns.forEach((btn) => {
             "cagr-result",
             `
             <div class="col">
-               <p> <span class="bold">
+               <p class="result-p"> <span class="bold">
                 CAGR: </span> ${formatPercentage(cagr)}</p><br>
-                <p> <span class="bold">
+                <p class="result-p"> <span class="bold">
                 Absolute Growth: </span> ${formatCurrency(finalValue - initialValue)} </p>
                 </div>
             `
