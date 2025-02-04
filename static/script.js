@@ -10,7 +10,7 @@ function removeCommas(str) {
 // Utility Functions
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
-    // style: "currency",
+    style: "currency",
     currency: "INR",
     maximumFractionDigits: 2,
   }).format(amount);
@@ -39,8 +39,11 @@ const showError = (elementId, message) => {
 
 // Calculator Functions
 const calculateSimpleInterest = (principal, rate, time) => {
+  principal = parseFloat(principal);
+  rate = parseFloat(rate);
+  time = parseFloat(time);
   const interest = (principal * rate * time) / 100;
-  const total = principal + interest;
+  const total = parseFloat(principal) + interest;
   return { interest, total };
 };
 
@@ -273,38 +276,46 @@ document.addEventListener("DOMContentLoaded", () => {
  }
 });
 
-// function inputs (principle) {
-//   let rawValue ;
-//   let numericValue;
-//   const numberInputs = document.querySelectorAll('.amount');
-//   numberInputs.forEach((input) => {
-//     input.addEventListener("focusout", function (e) {
+function inputs (principle) {
+  let rawValue ;
+  let numericValue;
+  const numberInputs = document.querySelectorAll('.amount');
+  numberInputs.forEach((input) => {
+    input.addEventListener("focusout", function (e) {
 
-//       rawValue = e.target.value;
-//       console.log("Raw Input Value:", rawValue);
+      rawValue = e.target.value;
+      console.log("Raw Input Value:", rawValue);
 
-//       numericValue = parseFloat(rawValue);
-//       //  if(e.target.value>0){
+      numericValue = parseFloat(rawValue);
+      //  if(e.target.value>0){
         
-//         let formattedValue = formatCurrency(numericValue);
-//         console.log("Formatted Value:", formattedValue);
-//         console.log(input.classList.value.includes('amount'))
+        let formattedValue = formatCurrency(numericValue);
+        console.log("Formatted Value:", formattedValue);
+        console.log(input.classList.value.includes('amount'))
 
-//         if(input.classList.value.includes('amount')){
-//         // Display formatted value 
-//         e.target.setAttribute('type','text')
-//         e.target.value = formattedValue
+        if(input.classList.value.includes('amount')){
+        // Display formatted value 
+        e.target.setAttribute('type','text')
+        e.target.value = formattedValue
+        e.target.setAttribute('data',numericValue)
         
-//         // Keep the actual number value in the input field
-//         input.value = numericValue;
-//         }
-//         // }
         
-//       });
-//   });
-//   }
 
-const btns = document.querySelectorAll(".btn");
+        
+        // Keep the actual number value in the input field
+        // e.target.value = numericValue;
+        }
+        // }
+        
+      });
+  
+  });
+  }
+
+  // Initialize inputs function
+inputs();
+
+const btns = document.querySelectorAll(".card-container");
 const popUp = document.getElementById("cal-Box");
 const cross = document.getElementById("cross");
 const popupBox = document.getElementById("inside-popup");
@@ -314,20 +325,23 @@ btns.forEach((btn) => {
     console.log("clicked", btn.className);
     const width = window.innerWidth;
     if(width <= 767){
-    window.scroll(100, 100);
+      // for mobile screen
+    window.scroll(100,400);
     
     popUp.style.display = "flex";
     }
     else if(width >= 768 && width <= 1024){
+      // for tablate screen
       window.scroll(950, 290);
       popUp.style.display = "flex";
     }
     else{
-      window.scroll(200, 400);
+      // for desktop screen
+      window.scroll(200, 650);
       popUp.style.display = "flex";
     }
     //  for simple intrest popup
-    if (btn.className.includes("sic")) {
+    if (btn.id.includes("sic")) {
       popupBox.innerHTML = `
             
           <!--   <div class="calculator-grid"> -->
@@ -338,7 +352,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="simple-interest-form" class="calculator-form">
                 <div class="input-group">
                 <label for="si-principal">Principal Amount (₹)</label>
-                <input type="number" step="1000" class = "inputs amount" id="si-principal" required min="0" placeholder="Principal Amount (₹)">
+                <input type="number" step="1" class = "inputs amount" id="si-principal" required min="0" placeholder="Principal Amount (₹)">
                 </div>
                 <div class="input-group">
                 <label for="si-rate">Interest Rate (%)</label>
@@ -354,11 +368,13 @@ btns.forEach((btn) => {
                 </div>
                 `;
                 // keyBoard ()
-
+                let principalValue = parseFloat(
+                  document.getElementById("si-principal").value 
+                );
               
-              // inputs()
+              inputs(principalValue)
                
-      // Simple Interest Calculator
+              
       document
         .getElementById("simple-interest-form")
         .addEventListener("submit", (e) => {
@@ -367,15 +383,16 @@ btns.forEach((btn) => {
           try {
             // resultSection.style.display = "flex"
             // principal = addThousandsSeparator(e.target.value)
-            const principal = parseFloat(
-              document.getElementById("si-principal").value 
-            );
+            // const principal = parseFloat(
+            //   document.getElementById("si-principal").data 
+            // );
+            const principal = document.getElementById("si-principal").getAttribute('data');
             
             const rate = parseFloat(document.getElementById("si-rate").value);
             const time = parseFloat(document.getElementById("si-time").value);
 
             const result = calculateSimpleInterest(principal, rate, time);
-            // inputs(principal)
+            // inputs(10000)
 
             showResult(
               "si-result",
@@ -393,7 +410,7 @@ btns.forEach((btn) => {
     }
 
     // for compound intrest popup
-    else if (btn.className.includes("cic")) {
+    else if (btn.id.includes("cic")) {
       popupBox.innerHTML = `
          <!-- Compound Interest Calculator -->
             <div class="calculator-tile none">
@@ -401,7 +418,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="compound-interest-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ci-principal">Principal Amount (₹)</label>
-                        <input class = "inputs amount" type="number" step="1000" id="ci-principal" required min="0" placeholder="Principal Amount (₹)"  >
+                        <input class = "inputs amount" type="number" step="1" id="ci-principal" required min="0" placeholder="Principal Amount (₹)"  >
                     </div>
                     <div class="input-group">
                         <label for="ci-rate">Interest Rate (%)</label>
@@ -465,7 +482,7 @@ btns.forEach((btn) => {
     }
 
     // for gratuity cal popup
-    else if (btn.className.includes("gc")) {
+    else if (btn.id.includes("gc")) {
       popupBox.innerHTML = `
          <!-- Gratuity Calculator -->
             <div class="calculator-tile none">
@@ -473,7 +490,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="gratuity-form" class="calculator-form">
                     <div class="input-group">
                         <label for="gratuity-salary">Last Drawn Salary (₹)</label>
-                        <input class = "inputs" type="number" step="1000" id="gratuity-salary" required min="0" placeholder="Last Drawn Salary (₹)" >
+                        <input class = "inputs" type="number" step="1" id="gratuity-salary" required min="0" placeholder="Last Drawn Salary (₹)" >
                     </div>
                     <div class="input-group">
                         <label for="gratuity-years">Years of Service</label>
@@ -514,7 +531,7 @@ btns.forEach((btn) => {
     }
 
     // for pf popup
-    else if (btn.className.includes("pf")) {
+    else if (btn.id.includes("pf")) {
       popupBox.innerHTML = `
          <!-- PF Calculator -->
             <div class="calculator-tile none">
@@ -522,7 +539,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="pf-form" class="calculator-form">
                     <div class="input-group">
                         <label for="pf-salary">Basic Salary (₹)</label>
-                        <input class = "inputs" type="number" step="1000" id="pf-salary" required min="0" placeholder="Basic Salary (₹)" >
+                        <input class = "inputs" type="number" step="1" id="pf-salary" required min="0" placeholder="Basic Salary (₹)" >
                     </div>
                     <div class="input-group">
                         <label for="pf-employer">Employer Contribution (%)</label>
@@ -573,7 +590,7 @@ btns.forEach((btn) => {
     }
 
     // for salary popup
-    else if (btn.className.includes("salary")) {
+    else if (btn.id.includes("salary")) {
       popupBox.innerHTML = `
           <!-- Salary Calculator -->
             <div class="calculator-tile none">
@@ -581,23 +598,23 @@ btns.forEach((btn) => {
                 <form class ="form" id="salary-form" class="calculator-form">
                     <div class="input-group">
                         <label for="salary-basic">Basic Salary (₹)</label>
-                        <input class = "inputs" type="number" id="salary-basic" required min="0" placeholder="Basic Salary (₹)" step="1000">
+                        <input class = "inputs" type="number" id="salary-basic" required min="0" placeholder="Basic Salary (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="salary-hra">HRA (₹)</label>
-                        <input class = "inputs" type="number" id="salary-hra" required min="0" placeholder="HRA (₹)" step="100" >
+                        <input class = "inputs" type="number" id="salary-hra" required min="0" placeholder="HRA (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="salary-da">DA (₹)</label>
-                        <input class = "inputs" type="number" id="salary-da" required min="0" placeholder="DA (₹)" step="100">
+                        <input class = "inputs" type="number" id="salary-da" required min="0" placeholder="DA (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="salary-allowances">Other Allowances (₹)</label>
-                        <input class = "inputs" type="number" id="salary-allowances" required min="0" placeholder="Other Allowances (₹)" step="1000">
+                        <input class = "inputs" type="number" id="salary-allowances" required min="0" placeholder="Other Allowances (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="salary-deductions">Deductions (₹)</label>
-                        <input class = "inputs" type="number" id="salary-deductions" required min="0" placeholder="Deductions (₹)" step="1000" >
+                        <input class = "inputs" type="number" id="salary-deductions" required min="0" placeholder="Deductions (₹)" step="1" >
                     </div>
                     <button type="submit">Calculate</button>
                     <div class="result" id="salary-result"></div>
@@ -646,14 +663,14 @@ btns.forEach((btn) => {
     }
 
     // for ppf popup
-    else if (btn.className.includes("publicProvidentFund")) {
+    else if (btn.id.includes("publicProvidentFund")) {
       popupBox.innerHTML = `
          <div class="calculator-tile ">
                 <h2 class="popup-heading">PPF Calculator</h2>
                 <form class ="form" id="ppf-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ppf-investment">Yearly Investment (₹)</label>
-                        <input class = "inputs" type="number" id="ppf-investment" required min="0" placeholder="Yearly Investment (₹)" step="1000" >
+                        <input class = "inputs" type="number" id="ppf-investment" required min="0" placeholder="Yearly Investment (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="ppf-time">Time Period (Years)</label>
@@ -697,7 +714,7 @@ btns.forEach((btn) => {
     }
 
     // for nps popup
-    else if (btn.className.includes("nps")) {
+    else if (btn.id.includes("nps")) {
       popupBox.innerHTML = `
          <!-- NPS Calculator -->
             <div class="calculator-tile none">
@@ -705,7 +722,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="nps-form" class="calculator-form">
                     <div class="input-group">
                         <label for="nps-contribution">Monthly Contribution (₹)</label>
-                        <input class = "inputs" type="number" id="nps-contribution" required min="0" placeholder="Monthly Contribution (₹)" step="1000" >
+                        <input class = "inputs" type="number" id="nps-contribution" required min="0" placeholder="Monthly Contribution (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="nps-return">Expected Return (%)</label>
@@ -761,7 +778,7 @@ btns.forEach((btn) => {
     }
 
     // for rd popup
-    else if (btn.className.includes("rd")) {
+    else if (btn.id.includes("rd")) {
       popupBox.innerHTML = `
          <!-- RD Calculator -->
             <div class="calculator-tile none">
@@ -769,7 +786,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="rd-form" class="calculator-form">
                     <div class="input-group">
                         <label for="rd-deposit">Monthly Deposit (₹)</label>
-                        <input class = "inputs" type="number" id="rd-deposit" required min="0" placeholder="Monthly Deposit (₹)" step="1000" >
+                        <input class = "inputs" type="number" id="rd-deposit" required min="0" placeholder="Monthly Deposit (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="rd-rate">Interest Rate (%)</label>
@@ -819,7 +836,7 @@ btns.forEach((btn) => {
     }
 
     // for fd popup
-    else if (btn.className.includes("fd")) {
+    else if (btn.id.includes("fd")) {
       popupBox.innerHTML = `
             <!-- FD Calculator -->
             <div class="calculator-tile none">
@@ -827,7 +844,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="fd-form" class="calculator-form">
                     <div class="input-group">
                         <label for="fd-principal">Principal Amount (₹)</label>
-                        <input class = "inputs" type="number" id="fd-principal" required min="0" placeholder="Principal Amount (₹)" step="1000">
+                        <input class = "inputs" type="number" id="fd-principal" required min="0" placeholder="Principal Amount (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="fd-rate">Interest Rate (%)</label>
@@ -875,7 +892,7 @@ btns.forEach((btn) => {
     }
 
     // for ltcg calculator
-    else if (btn.className.includes("ltcg")) {
+    else if (btn.id.includes("ltcg")) {
       popupBox.innerHTML = `
             <!-- LTCG Calculator -->
             <div class="calculator-tile none">
@@ -883,11 +900,11 @@ btns.forEach((btn) => {
                 <form class ="form" id="ltcg-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ltcg-selling">Selling Price (₹)</label>
-                        <input class = "inputs" type="number" id="ltcg-selling" required min="0" placeholder="Selling Price (₹)" step="1000" >
+                        <input class = "inputs" type="number" id="ltcg-selling" required min="0" placeholder="Selling Price (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="ltcg-cost">Cost Price (₹)</label>
-                        <input class = "inputs" type="number" id="ltcg-cost" required min="0" placeholder="Cost Price (₹)" step="1000">
+                        <input class = "inputs" type="number" id="ltcg-cost" required min="0" placeholder="Cost Price (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="ltcg-period">Holding Period (Years)</label>
@@ -931,18 +948,18 @@ btns.forEach((btn) => {
     }
 
     // for roi popup
-    else if (btn.className.includes("roi")) {
+    else if (btn.id.includes("roi")) {
       popupBox.innerHTML = `
          <div class="calculator-tile none">
                 <h2 class="popup-heading">ROI Calculator</h2>
                 <form class ="form" id="roi-form" class="calculator-form">
                     <div class="input-group">
                         <label for="roi-initial">Initial Investment (₹)</label>
-                        <input class = "inputs" type="number" id="roi-initial" required min="0" placeholder="Initial Investment (₹)" step="1000">
+                        <input class = "inputs" type="number" id="roi-initial" required min="0" placeholder="Initial Investment (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="roi-final">Final Value (₹)</label>
-                        <input class = "inputs" type="number" id="roi-final" required min="0" placeholder="Final Value (₹)" step="1000" >
+                        <input class = "inputs" type="number" id="roi-final" required min="0" placeholder="Final Value (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="roi-time">Time Period (Years)</label>
@@ -987,7 +1004,7 @@ btns.forEach((btn) => {
     }
 
     // for gst popup
-    else if (btn.className.includes("gst")) {
+    else if (btn.id.includes("gst")) {
       popupBox.innerHTML = `
          <!-- GST Calculator -->
             <div class="calculator-tile none">
@@ -995,7 +1012,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="gst-form" class="calculator-form">
                     <div class="input-group">
                         <label for="gst-amount">Amount (₹)</label>
-                        <input class = "inputs" type="number" id="gst-amount" required min="0" placeholder="Amount (₹)" step="1000">
+                        <input class = "inputs" type="number" id="gst-amount" required min="0" placeholder="Amount (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="gst-rate">GST Rate (%)</label>
@@ -1041,7 +1058,7 @@ btns.forEach((btn) => {
     }
 
     // for discount popup
-    else if (btn.className.includes("discount")) {
+    else if (btn.id.includes("discount")) {
       popupBox.innerHTML = `
             <!-- Discount Calculator -->
             <div class="calculator-tile none">
@@ -1049,7 +1066,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="discount-form" class="calculator-form">
                     <div class="input-group">
                         <label for="discount-price">Original Price (₹)</label>
-                        <input class = "inputs" type="number" id="discount-price" required min="0" placeholder="Original Price (₹)" step="1000">
+                        <input class = "inputs" type="number" id="discount-price" required min="0" placeholder="Original Price (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="discount-percentage">Discount (%)</label>
@@ -1092,7 +1109,7 @@ btns.forEach((btn) => {
     }
 
     // for emi popup
-    else if (btn.className.includes("emi")) {
+    else if (btn.id.includes("emi")) {
       popupBox.innerHTML = `
             <!-- EMI Calculator -->
             <div class="calculator-tile none">
@@ -1100,7 +1117,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="emi-form" class="calculator-form">
                     <div class="input-group">
                         <label for="emi-principal">Loan Amount (₹)</label>
-                        <input class = "inputs" type="number" id="emi-principal" required min="0" placeholder="Loan Amount (₹)" step="1000">
+                        <input class = "inputs" type="number" id="emi-principal" required min="0" placeholder="Loan Amount (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="emi-rate">Interest Rate (% p.a.)</label>
@@ -1147,7 +1164,7 @@ btns.forEach((btn) => {
     }
 
     // for downPayment popup
-    else if (btn.className.includes("downPayment")) {
+    else if (btn.id.includes("downPayment")) {
       popupBox.innerHTML = `
              <!-- Down Payment Calculator -->
             <div class="calculator-tile none">
@@ -1155,7 +1172,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="down-payment-form" class="calculator-form">
                     <div class="input-group">
                         <label for="dp-price">Asset Price (₹)</label>
-                        <input class = "inputs" type="number" id="dp-price" required min="0" placeholder="Asset Price (₹)" step="1000">
+                        <input class = "inputs" type="number" id="dp-price" required min="0" placeholder="Asset Price (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="dp-percentage">Down Payment (%)</label>
@@ -1202,7 +1219,7 @@ btns.forEach((btn) => {
     }
 
     // for cagr calculator
-    else if (btn.className.includes("cagr")) {
+    else if (btn.id.includes("cagr")) {
       popupBox.innerHTML = `
             <!-- CAGR Calculator -->
             <div class="calculator-tile none">
@@ -1210,11 +1227,11 @@ btns.forEach((btn) => {
                 <form class ="form" id="cagr-form" class="calculator-form">
                     <div class="input-group">
                         <label for="cagr-initial">Initial Value (₹)</label>
-                        <input class = "inputs" type="number" id="cagr-initial" required min="0" placeholder="Initial Value (₹)" step="1000">
+                        <input class = "inputs" type="number" id="cagr-initial" required min="0" placeholder="Initial Value (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="cagr-final">Final Value (₹)</label>
-                        <input class = "inputs" type="number" id="cagr-final" required min="0" placeholder="Final Value (₹)" step="1000">
+                        <input class = "inputs" type="number" id="cagr-final" required min="0" placeholder="Final Value (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="cagr-time">Time Period (Years)</label>

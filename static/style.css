@@ -142,8 +142,8 @@ p{
 
 /* make it's display flex dynamically */
 .calculator-box{
-  height: 100vw;
-  width: 100vw;
+  height: 290%;
+  width: 100%;
   position: absolute;
   background-color: transparent;
   top: 0;
@@ -214,6 +214,17 @@ p{
 .img{
   width: 1.5rem;
   cursor: pointer;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 /* =====================Popup content section================= */
@@ -366,21 +377,16 @@ footer{
   }
 }
 
-/* =================Mobile =================== */
+/* =================Mobile small screen =================== */
 @media only screen and (max-width: 378px) {
  
-   body{
-    margin: 0;
-    padding: 0;
-   }
+  
   .header{
     /* background-color: red; */
     width: 156%;
     padding: 2rem 0 2rem 3rem;
   }
-  .header-text{
-    /* font-size: 2.5rem; */
-  }
+
   p{
     display: none;
   }
@@ -389,24 +395,7 @@ footer{
     width: 4rem;
     height: 4rem;
   }
-  .calculator-box{
-    /* background-color: red; */
-    height: 81rem;
-    width: 148vw;
-  }
-  .flex-box {
-    width: 66%;
-    position: relative;
-    left: 31px;
-  }
-  section{
-    grid-row: auto auto;
-  grid-template-columns: auto auto ;
-  width: 40%;
-  margin: 3rem 0 0 0;
-  /* background-color: red; */
-  gap: 2rem 1rem;
-  }
+  
   .popup-heading{
     font-size: 1.2rem;
   }
@@ -423,58 +412,71 @@ footer{
   }
   .btn{
     display: none;
+  }
+  section{
+    grid-row: auto auto;
+  grid-template-columns: auto auto auto;
+  width: 24%;
+  margin: 3rem 0 0 0;
+  gap: 2rem 1rem;
   }
   
 }
+
+/* ========================================== */
+/* ================medium mobile screen ========== */
 @media only screen and (max-width: 378px){
   .header{
-    /* background-color: red; */
-    width: 100%;
+    width: 120%;
     padding: 2rem 0 2rem 3rem;
   }
   .result{
     width: fit-content;
   }
-  .flex-box {
-    
-    position: relative;
-    left: 60px;
-  }
+  
 }
+/* ================medium mobile screen end========== */
+
 @media only screen and (max-width: 426px) {
-  .header{
-    /* background-color: red; */
-    width: 120%;
-    padding: 2rem 0 2rem 3rem;
-  }
+  .header {
+    width: 93%;
+    padding: 0rem 0 0rem 3rem;
+    /* background: red; */
+}
   .header-text{
     font-size: 2.5rem;
   }
-  .calculator-box{
-    /* background-color: red; */
-    height: 81rem;
-    width: 148vw;
-  }
-  .flex-box {
-    width: 66%;
-    position: relative;
-    left: 31px;
-  }
+  
+  
   section{
-    grid-row: auto auto;
-  grid-template-columns: auto auto auto ;
-  width: 24%;
-  margin: 3rem 0 0 0;
+    /* grid-row: auto auto;
+  grid-template-columns: auto auto auto; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   /* background-color: red; */
+  width: 100%;
+  margin: 3rem 0 0 0;
+  padding: 0;
   gap: 2rem 1rem;
+  /* background-color: red; */
+  }
+  .card-container{
+    width: 7rem;
   }
   .card-img{
     margin: 10px;
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
   }
   p{
     display: none;
+  }
+  .calculator-box{
+    position: absolute; 
+    width: 100%;
+    height: 240%;
   }
   .popup-heading{
     font-size: 1.2rem;
@@ -483,6 +485,7 @@ footer{
     width: fit-content;
   }
   .result-p{
+    display: flex;
     font-size: 1rem;
   }
   .btn-img{
@@ -492,6 +495,10 @@ footer{
   }
   .btn{
     display: none;
+  }
+  .flex-box{
+    /* background-color: red; */
+    width: 80%;
   }
   
 }
