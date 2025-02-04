@@ -315,6 +315,7 @@ btns.forEach((btn) => {
     const width = window.innerWidth;
     if(width <= 767){
     window.scroll(100, 100);
+    
     popUp.style.display = "flex";
     }
     else if(width >= 768 && width <= 1024){
