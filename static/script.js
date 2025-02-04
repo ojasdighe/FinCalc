@@ -367,7 +367,7 @@ btns.forEach((btn) => {
                 <div class="result" id="si-result"></div>
                 </div>
                 `;
-                // keyBoard ()
+                
                 let principalValue = parseFloat(
                   document.getElementById("si-principal").value 
                 );
@@ -379,20 +379,16 @@ btns.forEach((btn) => {
         .getElementById("simple-interest-form")
         .addEventListener("submit", (e) => {
           e.preventDefault();
-          // showResultBox()
+          
           try {
-            // resultSection.style.display = "flex"
-            // principal = addThousandsSeparator(e.target.value)
-            // const principal = parseFloat(
-            //   document.getElementById("si-principal").data 
-            // );
+            
             const principal = document.getElementById("si-principal").getAttribute('data');
             
             const rate = parseFloat(document.getElementById("si-rate").value);
             const time = parseFloat(document.getElementById("si-time").value);
 
             const result = calculateSimpleInterest(principal, rate, time);
-            // inputs(10000)
+            
 
             showResult(
               "si-result",
@@ -443,6 +439,10 @@ btns.forEach((btn) => {
             </div>
 
         `;
+        const principal = parseFloat(
+          document.getElementById("ci-principal").value
+        );
+        inputs(principal)
       // Compound Interest Calculator
       document
         .getElementById("compound-interest-form")
@@ -450,7 +450,7 @@ btns.forEach((btn) => {
           e.preventDefault();
           try {
             const principal = parseFloat(
-              document.getElementById("ci-principal").value
+              document.getElementById("ci-principal").getAttribute('data')
             );
             const rate = parseFloat(document.getElementById("ci-rate").value);
             const time = parseFloat(document.getElementById("ci-time").value);
@@ -490,7 +490,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="gratuity-form" class="calculator-form">
                     <div class="input-group">
                         <label for="gratuity-salary">Last Drawn Salary (₹)</label>
-                        <input class = "inputs" type="number" step="1" id="gratuity-salary" required min="0" placeholder="Last Drawn Salary (₹)" >
+                        <input class = "inputs amount" type="number" step="1" id="gratuity-salary" required min="0" placeholder="Last Drawn Salary (₹)" >
                     </div>
                     <div class="input-group">
                         <label for="gratuity-years">Years of Service</label>
@@ -501,6 +501,10 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        let salary = parseFloat(
+          document.getElementById("gratuity-salary").value
+        );
+        inputs(salary)
       // Gratuity Calculator
       document
         .getElementById("gratuity-form")
@@ -508,7 +512,7 @@ btns.forEach((btn) => {
           e.preventDefault();
           try {
             const salary = parseFloat(
-              document.getElementById("gratuity-salary").value
+              document.getElementById("gratuity-salary").getAttribute('data')
             );
             const years = parseFloat(
               document.getElementById("gratuity-years").value
@@ -539,7 +543,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="pf-form" class="calculator-form">
                     <div class="input-group">
                         <label for="pf-salary">Basic Salary (₹)</label>
-                        <input class = "inputs" type="number" step="1" id="pf-salary" required min="0" placeholder="Basic Salary (₹)" >
+                        <input class = "inputs amount" type="number" step="1" id="pf-salary" required min="0" placeholder="Basic Salary (₹)" >
                     </div>
                     <div class="input-group">
                         <label for="pf-employer">Employer Contribution (%)</label>
@@ -554,11 +558,13 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        const salary = parseFloat(document.getElementById("pf-salary").value);
+        inputs(salary)
       // PF Calculator
       document.getElementById("pf-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
-          const salary = parseFloat(document.getElementById("pf-salary").value);
+          const salary = parseFloat(document.getElementById("pf-salary").getAttribute('data'));
           const employerContribution = parseFloat(
             document.getElementById("pf-employer").value
           );
@@ -598,7 +604,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="salary-form" class="calculator-form">
                     <div class="input-group">
                         <label for="salary-basic">Basic Salary (₹)</label>
-                        <input class = "inputs" type="number" id="salary-basic" required min="0" placeholder="Basic Salary (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="salary-basic" required min="0" placeholder="Basic Salary (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="salary-hra">HRA (₹)</label>
@@ -622,12 +628,17 @@ btns.forEach((btn) => {
             </div>
 
         `;
+        const basic = parseFloat(
+          document.getElementById("salary-basic").value
+        );
+        inputs(basic)
+        
       // Salary Calculator
       document.getElementById("salary-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const basic = parseFloat(
-            document.getElementById("salary-basic").value
+            document.getElementById("salary-basic").getAttribute('data')
           );
           const hra = parseFloat(document.getElementById("salary-hra").value);
           const da = parseFloat(document.getElementById("salary-da").value);
@@ -670,7 +681,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="ppf-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ppf-investment">Yearly Investment (₹)</label>
-                        <input class = "inputs" type="number" id="ppf-investment" required min="0" placeholder="Yearly Investment (₹)" step="1" >
+                        <input class = "inputs amount" type="number" id="ppf-investment" required min="0" placeholder="Yearly Investment (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="ppf-time">Time Period (Years)</label>
@@ -681,12 +692,16 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        const investment = parseFloat(
+          document.getElementById("ppf-investment").value
+        );
+        inputs(investment)
       // PPF Calculator
       document.getElementById("ppf-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const investment = parseFloat(
-            document.getElementById("ppf-investment").value
+            document.getElementById("ppf-investment").getAttribute('data')
           );
           const time = parseFloat(document.getElementById("ppf-time").value);
 
@@ -722,7 +737,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="nps-form" class="calculator-form">
                     <div class="input-group">
                         <label for="nps-contribution">Monthly Contribution (₹)</label>
-                        <input class = "inputs" type="number" id="nps-contribution" required min="0" placeholder="Monthly Contribution (₹)" step="1" >
+                        <input class = "inputs amount" type="number" id="nps-contribution" required min="0" placeholder="Monthly Contribution (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="nps-return">Expected Return (%)</label>
@@ -738,12 +753,16 @@ btns.forEach((btn) => {
             </div>
 
         `;
+        const monthlyContribution = parseFloat(
+          document.getElementById("nps-contribution").value
+        );
+        inputs(monthlyContribution)
       // NPS Calculator
       document.getElementById("nps-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const monthlyContribution = parseFloat(
-            document.getElementById("nps-contribution").value
+            document.getElementById("nps-contribution").getAttribute('data')
           );
           const returnRate = parseFloat(
             document.getElementById("nps-return").value
@@ -786,7 +805,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="rd-form" class="calculator-form">
                     <div class="input-group">
                         <label for="rd-deposit">Monthly Deposit (₹)</label>
-                        <input class = "inputs" type="number" id="rd-deposit" required min="0" placeholder="Monthly Deposit (₹)" step="1" >
+                        <input class = "inputs amount" type="number" id="rd-deposit" required min="0" placeholder="Monthly Deposit (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="rd-rate">Interest Rate (%)</label>
@@ -801,13 +820,17 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        const monthlyDeposit = parseFloat(
+          document.getElementById("rd-deposit").value
+        );
+        inputs(monthlyDeposit)
 
       // RD Calculator
       document.getElementById("rd-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const monthlyDeposit = parseFloat(
-            document.getElementById("rd-deposit").value
+            document.getElementById("rd-deposit").getAttribute('data')
           );
           const rate = parseFloat(document.getElementById("rd-rate").value);
           const time = parseFloat(document.getElementById("rd-time").value);
@@ -844,7 +867,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="fd-form" class="calculator-form">
                     <div class="input-group">
                         <label for="fd-principal">Principal Amount (₹)</label>
-                        <input class = "inputs" type="number" id="fd-principal" required min="0" placeholder="Principal Amount (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="fd-principal" required min="0" placeholder="Principal Amount (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="fd-rate">Interest Rate (%)</label>
@@ -859,12 +882,17 @@ btns.forEach((btn) => {
                 </form>
             </div>        
         `;
+        const principal = parseFloat(
+          document.getElementById("fd-principal").value
+        );
+        inputs(principal)
+
       // FD Calculator
       document.getElementById("fd-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const principal = parseFloat(
-            document.getElementById("fd-principal").value
+            document.getElementById("fd-principal").getAttribute('data')
           );
           const rate = parseFloat(document.getElementById("fd-rate").value);
           const time = parseFloat(document.getElementById("fd-time").value);
@@ -1012,7 +1040,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="gst-form" class="calculator-form">
                     <div class="input-group">
                         <label for="gst-amount">Amount (₹)</label>
-                        <input class = "inputs" type="number" id="gst-amount" required min="0" placeholder="Amount (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="gst-amount" required min="0" placeholder="Amount (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="gst-rate">GST Rate (%)</label>
@@ -1029,13 +1057,17 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        const amount = parseFloat(
+          document.getElementById("gst-amount").value
+        );
+        inputs(amount)
 
       // GST Calculator
       document.getElementById("gst-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const amount = parseFloat(
-            document.getElementById("gst-amount").value
+            document.getElementById("gst-amount").getAttribute('data')
           );
           const rate = parseFloat(document.getElementById("gst-rate").value);
 
@@ -1066,7 +1098,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="discount-form" class="calculator-form">
                     <div class="input-group">
                         <label for="discount-price">Original Price (₹)</label>
-                        <input class = "inputs" type="number" id="discount-price" required min="0" placeholder="Original Price (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="discount-price" required min="0" placeholder="Original Price (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="discount-percentage">Discount (%)</label>
@@ -1077,6 +1109,10 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        const price = parseFloat(
+          document.getElementById("discount-price").value
+        );
+        inputs(price)
       // Discount Calculator
       document
         .getElementById("discount-form")
@@ -1084,7 +1120,7 @@ btns.forEach((btn) => {
           e.preventDefault();
           try {
             const price = parseFloat(
-              document.getElementById("discount-price").value
+              document.getElementById("discount-price").getAttribute('data')
             );
             const discountPercentage = parseFloat(
               document.getElementById("discount-percentage").value
@@ -1117,7 +1153,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="emi-form" class="calculator-form">
                     <div class="input-group">
                         <label for="emi-principal">Loan Amount (₹)</label>
-                        <input class = "inputs" type="number" id="emi-principal" required min="0" placeholder="Loan Amount (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="emi-principal" required min="0" placeholder="Loan Amount (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="emi-rate">Interest Rate (% p.a.)</label>
@@ -1133,12 +1169,16 @@ btns.forEach((btn) => {
             </div>
 
         `;
+        const principal = parseFloat(
+          document.getElementById("emi-principal").value
+        );
+        inputs(principal)
       // EMI Calculator
       document.getElementById("emi-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const principal = parseFloat(
-            document.getElementById("emi-principal").value
+            document.getElementById("emi-principal").getAttribute('data')
           );
           const rate = parseFloat(document.getElementById("emi-rate").value);
           const time = parseFloat(document.getElementById("emi-time").value);
@@ -1172,7 +1212,7 @@ btns.forEach((btn) => {
                 <form class ="form" id="down-payment-form" class="calculator-form">
                     <div class="input-group">
                         <label for="dp-price">Asset Price (₹)</label>
-                        <input class = "inputs" type="number" id="dp-price" required min="0" placeholder="Asset Price (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="dp-price" required min="0" placeholder="Asset Price (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="dp-percentage">Down Payment (%)</label>
@@ -1183,6 +1223,10 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        const assetPrice = parseFloat(
+          document.getElementById("dp-price").value
+        );
+        inputs(assetPrice)
 
       // Down Payment Calculator
       document
@@ -1191,7 +1235,7 @@ btns.forEach((btn) => {
           e.preventDefault();
           try {
             const assetPrice = parseFloat(
-              document.getElementById("dp-price").value
+              document.getElementById("dp-price").getAttribute('data')
             );
             const downPaymentPercentage = parseFloat(
               document.getElementById("dp-percentage").value
