@@ -306,16 +306,6 @@ function inputs ( ) {
         e.target.value = formattedValue
         e.target.setAttribute('data',numericValue)
 
-   
-
-
-
-        
-        
-
-        
-        // Keep the actual number value in the input field
-        // e.target.value = numericValue;
         }
         // }
         
@@ -449,10 +439,8 @@ btns.forEach((btn) => {
             </div>
 
         `;
-        const principal = parseFloat(
-          document.getElementById("ci-principal").value
-        );
-        inputs(principal)
+        
+        inputs()
       // Compound Interest Calculator
       document
         .getElementById("compound-interest-form")
@@ -511,10 +499,8 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
-        let salary = parseFloat(
-          document.getElementById("gratuity-salary").value
-        );
-        inputs(salary)
+       
+        inputs()
       // Gratuity Calculator
       document
         .getElementById("gratuity-form")
@@ -568,8 +554,7 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
-        const salary = parseFloat(document.getElementById("pf-salary").value);
-        inputs(salary)
+        inputs()
       // PF Calculator
       document.getElementById("pf-form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -701,10 +686,8 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
-        const investment = parseFloat(
-          document.getElementById("ppf-investment").value
-        );
-        inputs(investment)
+        
+        inputs()
       // PPF Calculator
       document.getElementById("ppf-form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -762,10 +745,8 @@ btns.forEach((btn) => {
             </div>
 
         `;
-        const monthlyContribution = parseFloat(
-          document.getElementById("nps-contribution").value
-        );
-        inputs(monthlyContribution)
+       
+        inputs()
       // NPS Calculator
       document.getElementById("nps-form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -829,10 +810,8 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
-        const monthlyDeposit = parseFloat(
-          document.getElementById("rd-deposit").value
-        );
-        inputs(monthlyDeposit)
+        
+        inputs()
 
       // RD Calculator
       document.getElementById("rd-form").addEventListener("submit", (e) => {
@@ -891,10 +870,8 @@ btns.forEach((btn) => {
                 </form>
             </div>        
         `;
-        const principal = parseFloat(
-          document.getElementById("fd-principal").value
-        );
-        inputs(principal)
+        
+        inputs()
 
       // FD Calculator
       document.getElementById("fd-form").addEventListener("submit", (e) => {
@@ -1068,10 +1045,8 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
-        const amount = parseFloat(
-          document.getElementById("gst-amount").value
-        );
-        inputs(amount)
+        
+        inputs()
 
       // GST Calculator
       document.getElementById("gst-form").addEventListener("submit", (e) => {
@@ -1120,10 +1095,8 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
-        const price = parseFloat(
-          document.getElementById("discount-price").value
-        );
-        inputs(price)
+       
+        inputs()
       // Discount Calculator
       document
         .getElementById("discount-form")
@@ -1180,10 +1153,8 @@ btns.forEach((btn) => {
             </div>
 
         `;
-        const principal = parseFloat(
-          document.getElementById("emi-principal").value
-        );
-        inputs(principal)
+        
+        inputs()
       // EMI Calculator
       document.getElementById("emi-form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -1234,10 +1205,8 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
-        const assetPrice = parseFloat(
-          document.getElementById("dp-price").value
-        );
-        inputs(assetPrice)
+        
+        inputs()
 
       // Down Payment Calculator
       document
