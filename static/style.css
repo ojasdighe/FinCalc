@@ -111,7 +111,7 @@ section{
   padding: 1rem;
   border-radius: 10px;
   font-family: "Nunito", serif;
-  cursor: default;
+  cursor: pointer;
   transition: all ease-out 0.3s;
 
 }

@@ -276,20 +276,27 @@ document.addEventListener("DOMContentLoaded", () => {
  }
 });
 
-function inputs (principle) {
+function inputs ( ) {
   let rawValue ;
   let numericValue;
+  
+
   const numberInputs = document.querySelectorAll('.amount');
   numberInputs.forEach((input) => {
     input.addEventListener("focusout", function (e) {
 
       rawValue = e.target.value;
+      // rawValue = principle;
+
       console.log("Raw Input Value:", rawValue);
 
       numericValue = parseFloat(rawValue);
+      
       //  if(e.target.value>0){
         
         let formattedValue = formatCurrency(numericValue);
+       
+
         console.log("Formatted Value:", formattedValue);
         console.log(input.classList.value.includes('amount'))
 
@@ -298,6 +305,11 @@ function inputs (principle) {
         e.target.setAttribute('type','text')
         e.target.value = formattedValue
         e.target.setAttribute('data',numericValue)
+
+   
+
+
+
         
         
 
@@ -368,11 +380,9 @@ btns.forEach((btn) => {
                 </div>
                 `;
                 
-                let principalValue = parseFloat(
-                  document.getElementById("si-principal").value 
-                );
+               
               
-              inputs(principalValue)
+              inputs()
                
               
       document
@@ -608,19 +618,19 @@ btns.forEach((btn) => {
                     </div>
                     <div class="input-group">
                         <label for="salary-hra">HRA (₹)</label>
-                        <input class = "inputs" type="number" id="salary-hra" required min="0" placeholder="HRA (₹)" step="1" >
+                        <input class = "inputs amount" type="number" id="salary-hra" required min="0" placeholder="HRA (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="salary-da">DA (₹)</label>
-                        <input class = "inputs" type="number" id="salary-da" required min="0" placeholder="DA (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="salary-da" required min="0" placeholder="DA (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="salary-allowances">Other Allowances (₹)</label>
-                        <input class = "inputs" type="number" id="salary-allowances" required min="0" placeholder="Other Allowances (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="salary-allowances" required min="0" placeholder="Other Allowances (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="salary-deductions">Deductions (₹)</label>
-                        <input class = "inputs" type="number" id="salary-deductions" required min="0" placeholder="Deductions (₹)" step="1" >
+                        <input class = "inputs amount" type="number" id="salary-deductions" required min="0" placeholder="Deductions (₹)" step="1" >
                     </div>
                     <button type="submit">Calculate</button>
                     <div class="result" id="salary-result"></div>
@@ -628,10 +638,9 @@ btns.forEach((btn) => {
             </div>
 
         `;
-        const basic = parseFloat(
-          document.getElementById("salary-basic").value
-        );
-        inputs(basic)
+      
+       
+        inputs()
         
       // Salary Calculator
       document.getElementById("salary-form").addEventListener("submit", (e) => {
@@ -640,13 +649,13 @@ btns.forEach((btn) => {
           const basic = parseFloat(
             document.getElementById("salary-basic").getAttribute('data')
           );
-          const hra = parseFloat(document.getElementById("salary-hra").value);
-          const da = parseFloat(document.getElementById("salary-da").value);
+          const hra = parseFloat(document.getElementById("salary-hra").getAttribute('data'));
+          const da = parseFloat(document.getElementById("salary-da").getAttribute('data'));
           const allowances = parseFloat(
-            document.getElementById("salary-allowances").value
+            document.getElementById("salary-allowances").getAttribute('data')
           );
           const deductions = parseFloat(
-            document.getElementById("salary-deductions").value
+            document.getElementById("salary-deductions").getAttribute('data')
           );
 
           const result = calculateSalary(
@@ -928,11 +937,11 @@ btns.forEach((btn) => {
                 <form class ="form" id="ltcg-form" class="calculator-form">
                     <div class="input-group">
                         <label for="ltcg-selling">Selling Price (₹)</label>
-                        <input class = "inputs" type="number" id="ltcg-selling" required min="0" placeholder="Selling Price (₹)" step="1" >
+                        <input class = "inputs amount" type="number" id="ltcg-selling" required min="0" placeholder="Selling Price (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="ltcg-cost">Cost Price (₹)</label>
-                        <input class = "inputs" type="number" id="ltcg-cost" required min="0" placeholder="Cost Price (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="ltcg-cost" required min="0" placeholder="Cost Price (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="ltcg-period">Holding Period (Years)</label>
@@ -943,15 +952,16 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        inputs()
       // LTCG Calculator
       document.getElementById("ltcg-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const sellingPrice = parseFloat(
-            document.getElementById("ltcg-selling").value
+            document.getElementById("ltcg-selling").getAttribute('data')
           );
           const costPrice = parseFloat(
-            document.getElementById("ltcg-cost").value
+            document.getElementById("ltcg-cost").getAttribute('data')
           );
           const holdingPeriod = parseFloat(
             document.getElementById("ltcg-period").value
@@ -983,11 +993,11 @@ btns.forEach((btn) => {
                 <form class ="form" id="roi-form" class="calculator-form">
                     <div class="input-group">
                         <label for="roi-initial">Initial Investment (₹)</label>
-                        <input class = "inputs" type="number" id="roi-initial" required min="0" placeholder="Initial Investment (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="roi-initial" required min="0" placeholder="Initial Investment (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="roi-final">Final Value (₹)</label>
-                        <input class = "inputs" type="number" id="roi-final" required min="0" placeholder="Final Value (₹)" step="1" >
+                        <input class = "inputs amount" type="number" id="roi-final" required min="0" placeholder="Final Value (₹)" step="1" >
                     </div>
                     <div class="input-group">
                         <label for="roi-time">Time Period (Years)</label>
@@ -999,15 +1009,16 @@ btns.forEach((btn) => {
             </div>
         `;
 
+        inputs()
       // ROI Calculator
       document.getElementById("roi-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const initialInvestment = parseFloat(
-            document.getElementById("roi-initial").value
+            document.getElementById("roi-initial").getAttribute('data')
           );
           const finalValue = parseFloat(
-            document.getElementById("roi-final").value
+            document.getElementById("roi-final").getAttribute('data')
           );
           const time = parseFloat(document.getElementById("roi-time").value);
 
@@ -1271,11 +1282,11 @@ btns.forEach((btn) => {
                 <form class ="form" id="cagr-form" class="calculator-form">
                     <div class="input-group">
                         <label for="cagr-initial">Initial Value (₹)</label>
-                        <input class = "inputs" type="number" id="cagr-initial" required min="0" placeholder="Initial Value (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="cagr-initial" required min="0" placeholder="Initial Value (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="cagr-final">Final Value (₹)</label>
-                        <input class = "inputs" type="number" id="cagr-final" required min="0" placeholder="Final Value (₹)" step="1">
+                        <input class = "inputs amount" type="number" id="cagr-final" required min="0" placeholder="Final Value (₹)" step="1">
                     </div>
                     <div class="input-group">
                         <label for="cagr-time">Time Period (Years)</label>
@@ -1286,15 +1297,16 @@ btns.forEach((btn) => {
                 </form>
             </div>
         `;
+        inputs()
       // CAGR Calculator
       document.getElementById("cagr-form").addEventListener("submit", (e) => {
         e.preventDefault();
         try {
           const initialValue = parseFloat(
-            document.getElementById("cagr-initial").value
+            document.getElementById("cagr-initial").getAttribute('data')
           );
           const finalValue = parseFloat(
-            document.getElementById("cagr-final").value
+            document.getElementById("cagr-final").getAttribute('data')
           );
           const time = parseFloat(document.getElementById("cagr-time").value);
 
