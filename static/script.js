@@ -291,11 +291,12 @@ function inputs ( ) {
       console.log("Raw Input Value:", rawValue);
 
       numericValue = parseFloat(rawValue);
+
       
-      //  if(e.target.value>0){
+      if (!isNaN(numericValue)) {
         
-        let formattedValue = formatCurrency(numericValue);
-       
+         let formattedValue = formatCurrency(numericValue);
+        console.log(typeof(formattedValue))
 
         console.log("Formatted Value:", formattedValue);
         console.log(input.classList.value.includes('amount'))
@@ -307,7 +308,7 @@ function inputs ( ) {
         e.target.setAttribute('data',numericValue)
 
         }
-        // }
+        }
         
       });
   
